@@ -28,7 +28,6 @@ export default defineComponent({
   components: {
     ThisSiderView,
     ThisHeaderView,
-
   },
   setup() {
     return {

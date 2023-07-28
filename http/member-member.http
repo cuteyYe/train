@@ -7,9 +7,12 @@ Content-Type: application/x-www-form-urlencoded
 mobile=12345678
 ###
 POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-mobile=13000001100
+{
+  "mobile": "13000001100"
+}
+
 
 ###
 POST http://localhost:8000/member/member/login

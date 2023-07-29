@@ -1,5 +1,8 @@
 <template>
-  <a-button type="primary" @click="showModal">新增</a-button>
+  <p>
+    <a-button type="primary" @click="showModal">新增</a-button>
+  </p>
+  <a-table :dataSource="passengers" :columns="columns" />
   <a-modal v-model:visible="visible" title="乘车人" @ok="handleOk" ok-text="确认" cancel-text="取消">
     <a-form :model="passenger" :label-col="{span: 4}" :wrapper-col="{ span: 20 }">
       <a-form-item label="姓名">
@@ -19,7 +22,7 @@
   </a-modal>
 </template>
 <script>
-import {defineComponent, reactive, ref} from "vue";
+import {defineComponent, reactive, ref,onMounted} from "vue";
 import {notification} from "ant-design-vue";
 import axios from "axios";
 
@@ -33,8 +36,8 @@ export default defineComponent({
       type:undefined,
       createTime:undefined,
       updateTime:undefined,
-
     })
+
     const visible = ref(false)
     const  showModal = () =>{
       visible.value = true
@@ -50,11 +53,61 @@ export default defineComponent({
         }
       })
     }
+
+    const passengers = ref([])
+    const columns = [
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '身份证',
+        dataIndex: 'idCard',
+        key: 'idCard',
+      },
+      {
+        title: '旅客类型',
+        dataIndex: 'type',
+        key: 'type',
+      },
+      {
+        title: '操作',
+        dataIndex: 'operation'
+      }
+    ];
+
+    const handleQuery = (param) => {
+      axios.get("/member/passenger/query-list",{
+        params:{
+          page: param.page,
+          size: param.size
+        }
+      }).then(response => {
+        let data = response.data
+        if(data.success){
+          passengers.value = data.content.list
+        }else {
+          notification.error({description:data.message})
+        }
+      })
+    }
+
+    onMounted(()=>{
+      handleQuery({
+        page:1,
+        size: 2
+      })
+    })
+
     return {
+      passengers,
+      columns,
       passenger,
       visible,
       showModal,
-      handleOk
+      handleOk,
+      handleQuery
     }
   }
 })

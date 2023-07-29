@@ -41,7 +41,7 @@ public class PassengerService {
             criteria.andMemberIdEqualTo(req.getMemberId());
         }
         //分页语句
-        PageHelper.startPage(1,2);
+        PageHelper.startPage(req.getPage(), req.getSize());
         List<Passenger> passengerList = passengerMapper.selectByExample(passengerExample);
         return BeanUtil.copyToList(passengerList,PassengerQueryResp.class);
     }

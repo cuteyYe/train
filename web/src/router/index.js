@@ -6,8 +6,7 @@ const routes = [
   {
     path: '/login',
     component: () => import('../views/login.vue')
-  },
-  {
+  }, {
     path: '/',
     component: () => import('../views/main.vue'),
     meta:{
@@ -16,6 +15,9 @@ const routes = [
     children:[{
       path:'welcome',
       component:() => import('../views/main/welcome')
+    },{
+      path: 'passenger',
+      component:() => import('../views/main/passenger')
     }]
   },
   {

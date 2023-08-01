@@ -11,6 +11,9 @@ const routes = [
     },{
       path: 'about',
       component:() => import('../views/main/about')
+    },{
+        path: 'station',
+        component:() => import('../views/main/station')
     }]
   },
   {

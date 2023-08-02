@@ -37,7 +37,7 @@
       </a-menu-item>
       <a-menu-item key="/train_seat">
         <router-link to="/train_seat">
-          <user-outlined /> &nbsp; 座位表
+          <user-outlined /> &nbsp; 火车座位
         </router-link>
       </a-menu-item>
     </a-menu>

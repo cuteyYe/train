@@ -20,6 +20,9 @@ const routes = [
     },{
         path: 'train-station',
         component:() => import('../views/main/train-station')
+    },{
+        path: 'train_carriage',
+        component:() => import('../views/main/train-carriage')
     }]
   },
   {

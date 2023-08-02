@@ -166,6 +166,8 @@ export default defineComponent({
       });
     };
 
+
+
     const handleOk = () => {
       axios.post("/business/admin/train-station/save", trainStation.value).then((response) => {
         let data = response.data;
@@ -209,6 +211,17 @@ export default defineComponent({
       });
     };
 
+    const queryTrainCode = ()=> {
+      axios.get("/business/admin/train/query-all").then(response => {
+        let data = response.data
+        if(data.success){
+          console.log(data.content)
+        }else {
+          notification.error({description:data.message})
+        }
+      })
+    }
+
     const handleTableChange = (page) => {
       // console.log("看看自带的分页参数都有啥：" + JSON.stringify(page));
       pagination.value.pageSize = page.pageSize;
@@ -223,6 +236,7 @@ export default defineComponent({
         page: 1,
         size: pagination.value.pageSize
       });
+      queryTrainCode()
     });
 
     return {
@@ -237,7 +251,8 @@ export default defineComponent({
       onAdd,
       handleOk,
       onEdit,
-      onDelete
+      onDelete,
+      queryTrainCode
     };
   },
 });

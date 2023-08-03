@@ -12,27 +12,31 @@ const routes = [
       path: 'about',
       component:() => import('../views/main/about')
     },{
-        path: 'station',
-        component:() => import('../views/main/station')
+        path: 'base/',
+        children: [{
+            path: 'station',
+            component:() => import('../views/main/base/station')
+        },{
+            path: 'train',
+            component:() => import('../views/main/base/train')
+        },{
+            path: 'train-station',
+            component:() => import('../views/main/base/train-station')
+        },{
+            path: 'train_carriage',
+            component:() => import('../views/main/base/train-carriage')
+        },{
+            path: 'train_seat',
+            component:() => import('../views/main/base/train-seat')
+        }]
     },{
-        path: 'train',
-        component:() => import('../views/main/train')
-    },{
-        path: 'train-station',
-        component:() => import('../views/main/train-station')
-    },{
-        path: 'train_carriage',
-        component:() => import('../views/main/train-carriage')
-    },{
-        path: 'train_seat',
-        component:() => import('../views/main/train-seat')
-    },{
-        path: 'batch/job',
-        name: 'batch/job',
-        component:() => import('../views/main/job')
+        path: 'batch/',
+        children: [{
+            path: 'job',
+            component:() => import('../views/main/batch/job')
+        }]
     }]
-  },
-  {
+  }, {
     path:'',
     redirect:'/welcome'
   }

@@ -8,7 +8,6 @@ import org.quartz.JobExecutionException;
 @DisallowConcurrentExecution //禁用并发执行
 public class TestJob implements Job {
 
-
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         System.out.println("TestJob TEST开始");

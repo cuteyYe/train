@@ -26,6 +26,10 @@ const routes = [
     },{
         path: 'train_seat',
         component:() => import('../views/main/train-seat')
+    },{
+        path: 'batch/job',
+        name: 'batch/job',
+        component:() => import('../views/main/job')
     }]
   },
   {

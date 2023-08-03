@@ -3,6 +3,7 @@ package com.jiawa.train.business.controller.admin;
 import com.jiawa.train.business.req.TrainQueryReq;
 import com.jiawa.train.business.req.TrainSaveReq;
 import com.jiawa.train.business.resp.TrainQueryResp;
+import com.jiawa.train.business.service.TrainSeatService;
 import com.jiawa.train.business.service.TrainService;
 import com.jiawa.train.common.resp.CommonResp;
 import com.jiawa.train.common.resp.PageResp;
@@ -15,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/train")
 public class TrainAdminController {
+
+    @Resource
+    private TrainSeatService trainSeatService;
 
     @Resource
     private TrainService trainService;
@@ -41,6 +45,12 @@ public class TrainAdminController {
     public CommonResp<List<TrainQueryResp>> queryAll() {
         List<TrainQueryResp> list = trainService.queryAll();
         return new CommonResp<>(list);
+    }
+
+    @GetMapping("/gen-seat/{trainCode}")
+    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
+        trainSeatService.genTrainSeat(trainCode);
+        return new CommonResp<>();
     }
 
 }

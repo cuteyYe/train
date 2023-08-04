@@ -109,4 +109,12 @@ public class TrainStationService {
     public void delete(Long id) {
         trainStationMapper.deleteByPrimaryKey(id);
     }
+
+    public List<TrainStation> selectByUnique(String trainCode) {
+        TrainStationExample trainStationExample = new TrainStationExample();
+        trainStationExample.setOrderByClause("`index` asc");
+        trainStationExample.createCriteria().andTrainCodeEqualTo(trainCode);
+        return trainStationMapper.selectByExample(trainStationExample);
+    }
+
 }

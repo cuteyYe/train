@@ -6,15 +6,15 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jiawa.train.business.domain.Train;
-import com.jiawa.train.common.resp.PageResp;
-import com.jiawa.train.common.util.SnowUtil;
 import com.jiawa.train.business.domain.DailyTrain;
 import com.jiawa.train.business.domain.DailyTrainExample;
+import com.jiawa.train.business.domain.Train;
 import com.jiawa.train.business.mapper.DailyTrainMapper;
 import com.jiawa.train.business.req.DailyTrainQueryReq;
 import com.jiawa.train.business.req.DailyTrainSaveReq;
 import com.jiawa.train.business.resp.DailyTrainQueryResp;
+import com.jiawa.train.common.resp.PageResp;
+import com.jiawa.train.common.util.SnowUtil;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +33,9 @@ public class DailyTrainService {
 
     @Resource
     private DailyTrainMapper dailyTrainMapper;
+
+    @Resource
+    private DailyTrainStationService dailyTrainStationService;
 
     public void save(DailyTrainSaveReq req) {
         DateTime now = DateTime.now();
@@ -112,5 +115,8 @@ public class DailyTrainService {
         dailyTrain.setUpdateTime(now);
         dailyTrain.setDate(date);
         dailyTrainMapper.insert(dailyTrain);
+
+        //生成该车次的车站数据
+        dailyTrainStationService.genDaily(date,train.getCode());
     }
 }

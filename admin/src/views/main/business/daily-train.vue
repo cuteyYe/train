@@ -107,7 +107,6 @@ export default defineComponent({
     let loading = ref(false);
     let params = ref({
       code:null,
-      // date:null
     });
     const columns = [
     {

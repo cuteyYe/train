@@ -41,6 +41,12 @@ const routes = [
             path: 'daily-train',
             component:() => import('../views/main/business/daily-train')
         }]
+    },{
+        path: 'business/',
+        children: [{
+            path: 'daily-train-station',
+            component:() => import('../views/main/business/daily-train-station')
+        }]
     }]
   }, {
     path:'',

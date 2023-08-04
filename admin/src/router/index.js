@@ -35,6 +35,12 @@ const routes = [
             path: 'job',
             component:() => import('../views/main/batch/job')
         }]
+    },{
+        path: 'business/',
+        children: [{
+            path: 'daily-train',
+            component:() => import('../views/main/business/daily-train')
+        }]
     }]
   }, {
     path:'',

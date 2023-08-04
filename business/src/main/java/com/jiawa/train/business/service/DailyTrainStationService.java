@@ -84,7 +84,7 @@ public class DailyTrainStationService {
     }
 
     public void genDaily(Date date,String trainCode){
-        LOG.info("开始生成日期【{}】车次【{}】的车站信息", DateUtil.formatDate(date),trainCode);
+        LOG.info("生成日期【{}】车次【{}】的车站信息开始", DateUtil.formatDate(date),trainCode);
 
         //删除某日某车次的车站信息
         DailyTrainStationExample dailyTrainStationExample = new DailyTrainStationExample();
@@ -92,7 +92,7 @@ public class DailyTrainStationService {
         dailyTrainStationMapper.deleteByExample(dailyTrainStationExample);
 
         //查出某车次的所有车站信息
-        List<TrainStation> stationList = trainStationService.selectByUnique(trainCode);
+        List<TrainStation> stationList = trainStationService.selectByTrainCode(trainCode);
         if(CollUtil.isEmpty(stationList)){
             LOG.info("该车次没有车站基础数据，生成该车次车站信息结束");
             return;
@@ -106,5 +106,7 @@ public class DailyTrainStationService {
             dailyTrainStation.setDate(date);
             dailyTrainStationMapper.insert(dailyTrainStation);
         }
+        LOG.info("生成日期【{}】车次【{}】的车站信息结束", DateUtil.formatDate(date),trainCode);
     }
+
 }

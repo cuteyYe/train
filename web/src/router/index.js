@@ -21,6 +21,9 @@ const routes = [
     },{
       path: 'ticket',
       component:() => import('../views/main/ticket')
+    },{
+      path: 'order',
+      component:() => import('../views/main/order')
     }]
   },
   {

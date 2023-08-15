@@ -38,30 +38,21 @@ const routes = [
     },{
         path: 'business/',
         children: [{
+            path: 'confirm-order',
+            component: () => import('../views/main/business/confirm-order')
+        },{
             path: 'daily-train',
             component:() => import('../views/main/business/daily-train')
-        }]
-    },{
-        path: 'business/',
-        children: [{
+        },{
             path: 'daily-train-station',
             component:() => import('../views/main/business/daily-train-station')
-        }]
-    },{
-        path: 'business/',
-        children: [{
+        },{
             path: 'daily-train-carriage',
             component:() => import('../views/main/business/daily-train-carriage')
-        }]
-    },{
-        path: 'business/',
-        children: [{
+        },{
             path: 'daily-train-seat',
             component:() => import('../views/main/business/daily-train-seat')
-        }]
-    },{
-        path: 'business/',
-        children: [{
+        },{
             path: 'daily-train-ticket',
             component:() => import('../views/main/business/daily-train-ticket')
         }]

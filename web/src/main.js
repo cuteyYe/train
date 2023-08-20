@@ -9,7 +9,6 @@ import axios from 'axios';
 import './assets/js/enums'
 
 
-// createApp(App).use(Antd).use(store).use(router).mount('#app')
 const app = createApp(App);
 app.use(Antd).use(store).use(router).mount('#app');
 

@@ -56,6 +56,12 @@ const routes = [
             path: 'daily-train-ticket',
             component:() => import('../views/main/business/daily-train-ticket')
         }]
+    },{
+        path: 'member/',
+        children: [{
+            path: 'ticket',
+            component:() => import('../views/main/member/ticket')
+        }]
     }]
   }, {
     path:'',

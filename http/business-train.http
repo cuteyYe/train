@@ -10,3 +10,8 @@ Accept: application/json
 ###/admin/train
 GET http://localhost:8000/business/admin/train/query-all
 Accept: application/json
+
+
+###
+DELETE http://localhost:8000/business/admin/train/delete/123
+Accept: application/json

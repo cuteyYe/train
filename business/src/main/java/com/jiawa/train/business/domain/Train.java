@@ -1,10 +1,9 @@
 package com.jiawa.train.business.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 //Serializable 将类序列化
-public class Train implements Serializable {
+public class Train {
     private Long id;
 
     private String code;

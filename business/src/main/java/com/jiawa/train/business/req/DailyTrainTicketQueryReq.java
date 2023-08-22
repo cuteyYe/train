@@ -64,13 +64,14 @@ public class DailyTrainTicketQueryReq extends PageReq {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DailyTrainTicketQueryReq that)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        DailyTrainTicketQueryReq that = (DailyTrainTicketQueryReq) o;
         return Objects.equals(date, that.date) && Objects.equals(trainCode, that.trainCode) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(((DailyTrainTicketQueryReq) o).getPage(), that.getPage()) && Objects.equals(((DailyTrainTicketQueryReq) o).getSize(), that.getSize());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, trainCode, start, end, getPage(), getSize());
+        return Objects.hash(date, trainCode, start, end,getPage(),getSize());
     }
 
     @Override

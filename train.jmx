@@ -119,14 +119,34 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="购票" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;dailyTrainTicketId&quot;:1691378751344087041,&#xd;
+  &quot;date&quot;:1694016000000,&#xd;
+  &quot;end&quot;:&quot;南京&quot;,&#xd;
+  &quot;start&quot;:&quot;广州&quot;,&#xd;
+  &quot;tickets&quot;:[{&#xd;
+    &quot;passengerId&quot;:1685475391373971456,&#xd;
+    &quot;passengerIdCard&quot;:&quot;345&quot;,&#xd;
+    &quot;passengerName&quot;:&quot;小鹅&quot;,&#xd;
+    &quot;passengerType&quot;:&quot;1&quot;,&#xd;
+    &quot;seatTypeCode&quot;:&quot;1&quot;&#xd;
+  }],&#xd;
+  &quot;trainCode&quot;:&quot;G1&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain"></stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
+          <stringProp name="HTTPSampler.port">8000</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.path">/business/confirm-order/do</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -141,11 +161,11 @@
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json:charset=utf-8</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
               <elementProp name="token" elementType="Header">
                 <stringProp name="Header.name">token</stringProp>
-                <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTMwMjA2MzMsIm1vYmlsZSI6IjEzNDI5MDA0NjMzIiwiaWQiOjE2ODQ3OTcwMjE3MTU4Mjg3MzYsImV4cCI6MTY5MzEwNzAzMywiaWF0IjoxNjkzMDIwNjMzfQ.dJcIGmUsHaOSdz2mxDG6MpdzyHNUPBXzkf111cHCbAo</stringProp>
+                <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTMwMzIzMjYsIm1vYmlsZSI6IjEzNDI5MDA0NjMzIiwiaWQiOjE2ODQ3OTcwMjE3MTU4Mjg3MzYsImV4cCI6MTY5MzExODcyNiwiaWF0IjoxNjkzMDMyMzI2fQ.iJZCJDZ_XmMHTRGOOKlFulrp9FbRKqW1ll6cqKSWABg</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>

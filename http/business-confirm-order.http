@@ -1,6 +1,6 @@
 POST http://localhost:8000/business/confirm-order/do
 Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTMwMjA2MzMsIm1vYmlsZSI6IjEzNDI5MDA0NjMzIiwiaWQiOjE2ODQ3OTcwMjE3MTU4Mjg3MzYsImV4cCI6MTY5MzEwNzAzMywiaWF0IjoxNjkzMDIwNjMzfQ.dJcIGmUsHaOSdz2mxDG6MpdzyHNUPBXzkf111cHCbAo
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTMwMzIzMjYsIm1vYmlsZSI6IjEzNDI5MDA0NjMzIiwiaWQiOjE2ODQ3OTcwMjE3MTU4Mjg3MzYsImV4cCI6MTY5MzExODcyNiwiaWF0IjoxNjkzMDMyMzI2fQ.iJZCJDZ_XmMHTRGOOKlFulrp9FbRKqW1ll6cqKSWABg
 
 {
   "dailyTrainTicketId":1691378751344087041,
@@ -12,7 +12,7 @@ token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTMwMjA2MzMsIm1vYmlsZSI6
     "passengerIdCard":"345",
     "passengerName":"小鹅",
     "passengerType":"1",
-    "seatTypeCode":"2"
+    "seatTypeCode":"1"
   }],
   "trainCode":"G1"
 }

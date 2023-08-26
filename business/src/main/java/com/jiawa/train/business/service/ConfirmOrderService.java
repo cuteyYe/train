@@ -96,7 +96,8 @@ public class ConfirmOrderService {
         confirmOrderMapper.deleteByPrimaryKey(id);
     }
 
-    public void doConfirm(ConfirmOrderDoReq req) {
+    //synchronized会存在两个问题:1.导致售卖效率不高(可以容忍) 2.在多节点情况下会超卖(不能容忍)
+    public synchronized void doConfirm(ConfirmOrderDoReq req) {
         // 省略业务数据校验，如：车次是否存在，余票是否存在，车次是否在有效期内，tickets条数>0，同乘客同车次是否已买过
 
         // 保存确认订单表，状态初始

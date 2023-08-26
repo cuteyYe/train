@@ -119,7 +119,6 @@ public class ConfirmOrderService {
             LOG.info("很遗憾,没抢到锁");
             throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
         }
-
 //        RLock lock = null;
          /*
             关于红锁，看16.7节：
@@ -247,11 +246,14 @@ public class ConfirmOrderService {
                 throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_EXCEPTION);
             }
             //删除分布式锁
-            LOG.info("购票流程结束,释放锁");
-            redisTemplate.delete(lockKey);
+//            LOG.info("购票流程结束,释放锁");
+//            redisTemplate.delete(lockKey);
 //        } catch (InterruptedException e) {
 //            LOG.error("购票异常", e);
         } finally {
+            //try finally不能包含加锁的那段代码，否则加锁失败会走到finally里，从而释放别的线程的锁
+            LOG.info("购票流程结束,释放锁");
+            redisTemplate.delete(lockKey);
 //            LOG.info("购票流程结束，释放锁");
 //            if (null != lock && lock.isHeldByCurrentThread()) {
 //                lock.unlock();

@@ -3,13 +3,16 @@ package com.jiawa.train.business.service;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.fastjson.JSON;
 import com.jiawa.train.business.enums.RedisKeyPreEnum;
+import com.jiawa.train.business.enums.RocketMQTopicEnum;
 import com.jiawa.train.business.mapper.ConfirmOrderMapper;
 import com.jiawa.train.business.req.ConfirmOrderDoReq;
 import com.jiawa.train.common.context.LoginMemberContext;
 import com.jiawa.train.common.exception.BusinessException;
 import com.jiawa.train.common.exception.BusinessExceptionEnum;
 import jakarta.annotation.Resource;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +33,13 @@ public class BeforeConfirmOrderService {
     private SkTokenService skTokenService;
 
      @Resource
-    // public RocketMQTemplate rocket
      public RocketMQTemplate rocketMQTemplate;
+
 
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Resource
-    private ConfirmOrderService confirmOrderService;
+
 
     @SentinelResource(value = "beforeDoConfirm", blockHandler = "beforeDoConfirmBlock")
     public void beforeDoConfirm(ConfirmOrderDoReq req) {
@@ -53,7 +55,7 @@ public class BeforeConfirmOrderService {
         //购票
         String lockKey = RedisKeyPreEnum.CONFIRM_ORDER + "-" + DateUtil.formatDate(req.getDate()) + "-" + req.getTrainCode();
         Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(lockKey, lockKey, 60, TimeUnit.SECONDS);
-//        setIfAbsent 相当于setnx
+        // setIfAbsent 相当于setnx
         if (Boolean.TRUE.equals(setIfAbsent)) {
             LOG.info("恭喜,抢到锁了");
         } else {
@@ -61,6 +63,12 @@ public class BeforeConfirmOrderService {
             LOG.info("很遗憾,没抢到锁");
             throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
         }
+
+        //发送mq排队购票
+        String reqJson = JSON.toJSONString(req);
+        LOG.info("排队购票,发送mq开始,消息:{}",reqJson);
+        rocketMQTemplate.convertAndSend(RocketMQTopicEnum.CONFIRM_ORDER.getCode(),reqJson);
+        LOG.info("排队购票,发送mq结束");
 
     }
 

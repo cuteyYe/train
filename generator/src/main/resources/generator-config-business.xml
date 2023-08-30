@@ -41,6 +41,6 @@
                              targetPackage="com.jiawa.train.business.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="confirm_order" domainObjectName="ConfirmOrder"/>
+        <table tableName="sk_token" domainObjectName="SkToken"/>
     </context>
 </generatorConfiguration>

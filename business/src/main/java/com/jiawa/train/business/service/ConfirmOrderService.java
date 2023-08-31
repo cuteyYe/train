@@ -392,6 +392,13 @@ public class ConfirmOrderService {
      * @param offsetList
      */
     private void getSeat(List<DailyTrainSeat> finalSeatList, Date date, String trainCode, String seatType, String column, List<Integer> offsetList, Integer startIndex, Integer endIndex) {
+        // 为了演示排队效果，每次出票增加200毫秒延时
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 构造ConfirmOrderDoReq
         List<DailyTrainSeat> getSeatList = new ArrayList<>();
         List<DailyTrainCarriage> carriageList = dailyTrainCarriageService.selectBySeatType(date, trainCode, seatType);
         LOG.info("共查出{}个符合条件的车厢", carriageList.size());

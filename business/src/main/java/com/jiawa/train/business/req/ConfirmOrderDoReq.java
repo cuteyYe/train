@@ -63,6 +63,19 @@ public class ConfirmOrderDoReq {
     @NotBlank(message = "【图片验证码】参数非法")
     private String imageCodeToken;
 
+    /**
+     * 日志跟踪号
+     */
+    private String logId;
+
+    public String getLogId() {
+        return logId;
+    }
+
+    public void setLogId(String logId) {
+        this.logId = logId;
+    }
+
     public String getImageCode() {
         return imageCode;
     }
@@ -147,6 +160,7 @@ public class ConfirmOrderDoReq {
         sb.append(", tickets=").append(tickets);
         sb.append(", imageCode='").append(imageCode).append('\'');
         sb.append(", imageCodeToken='").append(imageCodeToken).append('\'');
+        sb.append(", logId='").append(logId).append('\'');
         sb.append('}');
         return sb.toString();
     }

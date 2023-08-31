@@ -43,7 +43,7 @@ public class BeforeConfirmOrderService {
 
 
     @SentinelResource(value = "beforeDoConfirm", blockHandler = "beforeDoConfirmBlock")
-    public void beforeDoConfirm(ConfirmOrderDoReq req) {
+    public Long beforeDoConfirm(ConfirmOrderDoReq req) {
         req.setMemberId(LoginMemberContext.getId());
         //校验令牌余量
         boolean validSkToken = skTokenService.validSkToken(req.getDate(), req.getTrainCode(), LoginMemberContext.getId());
@@ -86,7 +86,7 @@ public class BeforeConfirmOrderService {
         LOG.info("排队购票,发送mq开始,消息:{}",confirmOrderMQDto);
         rocketMQTemplate.convertAndSend(RocketMQTopicEnum.CONFIRM_ORDER.getCode(),reqJson);
         LOG.info("排队购票,发送mq结束");
-
+        return confirmOrder.getId();
     }
 
     /**
@@ -94,7 +94,7 @@ public class BeforeConfirmOrderService {
      * @param req
      * @param e
      */
-    public void beforeDoConfirmBlock(ConfirmOrderDoReq req, BlockException e) {
+    public Long beforeDoConfirmBlock(ConfirmOrderDoReq req, BlockException e) {
         LOG.info("购票请求被限流：{}", req);
         throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_FLOW_EXCEPTION);
     }

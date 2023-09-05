@@ -27,6 +27,9 @@ const routes = [
     },{
       path: 'my-ticket',
       component:() => import('../views/main/my-ticket')
+    },{
+      path: 'seat',
+      component:() => import('../views/main/seat')
     }]
   },
   {

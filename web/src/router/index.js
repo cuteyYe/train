@@ -30,6 +30,9 @@ const routes = [
     },{
       path: 'seat',
       component:() => import('../views/main/seat')
+    },{
+      path: 'admin',
+      component:() => import('../views/main/admin')
     }]
   },
   {

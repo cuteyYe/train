@@ -31,8 +31,10 @@ import com.jiawa.train.common.util.SnowUtil;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -63,8 +65,6 @@ public class ConfirmOrderService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Resource
-    private SkTokenService skTokenService;
 
 //    @Autowired
 //    private RedissonClient redissonClient;
@@ -113,8 +113,11 @@ public class ConfirmOrderService {
 
     //synchronized会存在两个问题:1.导致售卖效率不高(可以容忍) 2.在多节点情况下会超卖(不能容忍)
 //    @SentinelResource("doConfirm")
+    @Async
     @SentinelResource(value = "doConfirm",blockHandler = "doConfirmBlock")
     public void doConfirm(ConfirmOrderMQDto dto) {
+        MDC.put("LOG_ID",dto.getLogId());
+        LOG.info("异步出票开始:{}",dto);
         //校验令牌余量
 //        boolean validSkToken = skTokenService.validSkToken(req.getDate(), req.getTrainCode(), LoginMemberContext.getId());
 //        if (validSkToken) {

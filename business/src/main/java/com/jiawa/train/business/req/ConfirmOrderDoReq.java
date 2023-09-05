@@ -68,6 +68,37 @@ public class ConfirmOrderDoReq {
      */
     private String logId;
 
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ConfirmOrderDoReq{");
+        sb.append("memberId=").append(memberId);
+        sb.append(", date=").append(date);
+        sb.append(", trainCode='").append(trainCode).append('\'');
+        sb.append(", start='").append(start).append('\'');
+        sb.append(", end='").append(end).append('\'');
+        sb.append(", dailyTrainTicketId=").append(dailyTrainTicketId);
+        sb.append(", tickets=").append(tickets);
+        sb.append(", imageCode='").append(imageCode).append('\'');
+        sb.append(", imageCodeToken='").append(imageCodeToken).append('\'');
+        sb.append(", logId='").append(logId).append('\'');
+        sb.append(", lineNumber=").append(lineNumber);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    /**
+     * 加入排队人数，用于体验排队功能
+     */
+    private int lineNumber;
+
     public String getLogId() {
         return logId;
     }
@@ -148,20 +179,4 @@ public class ConfirmOrderDoReq {
         this.tickets = tickets;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("ConfirmOrderDoReq{");
-        sb.append("memberId=").append(memberId);
-        sb.append(", date=").append(date);
-        sb.append(", trainCode='").append(trainCode).append('\'');
-        sb.append(", start='").append(start).append('\'');
-        sb.append(", end='").append(end).append('\'');
-        sb.append(", dailyTrainTicketId=").append(dailyTrainTicketId);
-        sb.append(", tickets=").append(tickets);
-        sb.append(", imageCode='").append(imageCode).append('\'');
-        sb.append(", imageCodeToken='").append(imageCodeToken).append('\'');
-        sb.append(", logId='").append(logId).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }
